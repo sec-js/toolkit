@@ -9,30 +9,38 @@ description: >-
 
 ## URL
 
-**GitHub:** [https://github.com/digitalmethodsinitiative/zeeschuimer](https://github.com/digitalmethodsinitiative/zeeschuimer) – (Firefox extension download and source code)\
+\
 **Tool page:** [Digital Methods Initiative – Zeeschuimer](https://medialab.sciencespo.fr/en/tools/zeeschuimer/)\
 (Reviewed Version: 1.13.1 on 06. Aug 2025)
 
+**GitHub:** [https://github.com/digitalmethodsinitiative/zeeschuimer](https://github.com/digitalmethodsinitiative/zeeschuimer) – (Firefox extension download and source code)
+
 ## Description
 
-Zeeschuimer (Dutch for “sea foamer”) is a browser extension that **captures data from social media platforms as you browse them**, storing the posts you see for later analysis It was developed for researchers and journalists who need to study content on platforms that lack accessible data export tools or APIs – for example, TikTok or certain parts of Instagram where traditional scraping is difficult. By **logging the posts and other items that load in your browser feed**, Zeeschuimer lets you build a dataset of exactly what was shown to you during a browsing session.
+Zeeschuimer (Dutch for “sea foamer”) is a browser extension that **captures data from social media platforms as you browse them**, storing the posts you see for later analysis. It was developed for researchers and journalists who need to study content on platforms that lack accessible data export tools or APIs – for example, TikTok or certain parts of Instagram where traditional scraping is difficult.&#x20;
+
+By **logging the posts and other items that load in your browser feed**, Zeeschuimer lets you build a dataset of exactly what was shown to you during a browsing session.
 
 ### What problem does it solve?
 
-Major social‑media platforms have closed or severely limited their public APIs, making it difficult to obtain data for research and journalism. Web‑scraping libraries often struggle with constantly changing front‑end code or risk violating terms of service. Zeeschuimer addresses this challenge by **recording** rather than scraping – it captures the requests and responses your browser makes as you scroll through a platform and extracts the relevant post or comment information. The developers [describe](https://github.com/digitalmethodsinitiative/zeeschuimer) that _“the extension does not interfere with normal browsing and never uploads data automatically; it uses the browser’s WebRequest API to locally intercept and parse the data that these platforms send to your browser”._ In other words, it behaves like a passive observer: recording network calls for posts as you scroll, without modifying what you see or alerting the platform. \
+Major social‑media platforms have closed or severely limited their public APIs, making it difficult to obtain data for research and journalism. Web‑scraping libraries often struggle with constantly changing front‑end code or risk violating terms of service. Zeeschuimer addresses this challenge by **recording** rather than scraping – it captures the requests and responses your browser makes as you scroll through a platform and extracts the relevant post or comment information.     &#x20;
+
+The developers [describe](https://github.com/digitalmethodsinitiative/zeeschuimer) that _“the extension does not interfere with normal browsing and never uploads data automatically; it uses the browser’s WebRequest API to locally intercept and parse the data that these platforms send to your browser”._ In other words, it behaves like a passive observer: recording network calls for posts as you scroll, without modifying what you see or alerting the platform.                                   \
+
+
 This approach allows researchers to collect data from platforms that have no [public API,](https://www.techtarget.com/searchapparchitecture/definition/open-API-public-API) such as TikTok and Instagram, while keeping control over what is collected and when it is exported. Because the extension stores data locally and only uploads when explicitly instructed, it also helps researchers respect privacy and [institutional data‑protection rules](https://gdprhub.eu/Data_Protection_in_the_European_Union).
 
 #### How does it work?
 
 1. **Installation** – Signed `.xpi` files are provided on [Zeeschuimer’s GitHub releases page](https://github.com/digitalmethodsinitiative/zeeschuimer/releases/). According to the[ Digital Methods Initiative](https://www.digitalmethods.net/Dmi/ToolZeeschuimer), these files can be installed in any Firefox‑based browser. Researchers who need the very latest version can clone the repository and run it from the Firefox debugging console.
-2. **Monitoring and recording** – Once installed, the extension runs in the background while you browse a supported social‑media site. Zeeschuimer monitors all traffic between the browser and the platform and extracts the content you encounter – posts, comments, account information, etc. NodeXL’s blog explains that the extension uses the browser’s record feature to write all traffic to a local file, making this method distinct from web scraping.
+2. **Monitoring and recording** – Once installed, the extension runs in the background while you browse a supported social‑media site. Zeeschuimer monitors all traffic between the browser and the platform and extracts the content you encounter – posts, comments, account information, etc. A [blog post](https://www.smrfoundation.org/nodexl/tutorials/instagram-post-networks/) by the people behind the network analysis tool NodeXL explains that the extension uses the browser’s record feature to write all traffic to a local file, making this method distinct from web scraping.
 3. **Manual data collection** – Data collection is manual. When you open a page on TikTok, Instagram or another supported platform, you simply scroll through the feed or search results; Zeeschuimer captures the content that is loaded. The [NodeXL tutorial](https://www.smrfoundation.org/nodexl/tutorials/instagram-post-networks/) notes that users can perform multiple scrolls to gather larger samples – for example, retrieving roughly 1,000 posts by repeatedly scrolling down a profile or hashtag feed.
-4. **Exporting data** – When you are finished collecting, open Zeeschuimer’s pop‑up and export the session. The extension can output a [newline‑delimited JSON (ndjson) file](https://ndjson.org/). You can either upload this file directly into a 4CAT instance for analysis or convert it to CSV via a companion tool such as [**Zeehaven**](https://github.com/PublicDataLab/zeehaven), which provides a drag‑and‑drop conversion service. Tools like [NodeXL](https://www.smrfoundation.org/2025/04/25/social-media-data-collection-via-zeeschuimer-data-analysis-via-nodexl-pro-data-import-import-from-file/) include importers that recognise Zeeschuimer files and automatically configure the fields.
-5. **Analysis** – Once the data is in CSV or JSON format, you can analyse it using 4CAT, NodeXL, or other software. The [NodeXL tutorial](https://www.smrfoundation.org/2025/04/25/social-media-data-collection-via-zeeschuimer-data-analysis-via-nodexl-pro-data-import-import-from-file/) demonstrates how to import a Zeeschuimer file into NodeXL, construct network edges (for example, post‑author to mentioned user), and then run automated analyses
+4. **Exporting data** – When you are finished collecting, open Zeeschuimer’s pop‑up and export the session. The extension can output a [newline‑delimited JSON (ndjson) file](https://ndjson.org/). You can either upload this file directly into a [4CAT](https://github.com/digitalmethodsinitiative/4cat) instance for analysis or convert it to CSV via a companion tool such as [**Zeehaven**](https://github.com/PublicDataLab/zeehaven), which provides a drag‑and‑drop conversion service. Tools like [NodeXL](https://www.smrfoundation.org/2025/04/25/social-media-data-collection-via-zeeschuimer-data-analysis-via-nodexl-pro-data-import-import-from-file/) include importers that recognise Zeeschuimer files and automatically configure the fields.
+5. **Analysis** – Once the data is in CSV or JSON format, you can analyse it using 4CAT, NodeXL, or other software. The [NodeXL tutorial](https://www.smrfoundation.org/2025/04/25/social-media-data-collection-via-zeeschuimer-data-analysis-via-nodexl-pro-data-import-import-from-file/) demonstrates how to import a Zeeschuimer file into NodeXL, construct network edges (for example, post‑author to mentioned user), and then run automated analyses.
 
 In practical terms, this means a journalist could **capture a personalized feed or search results,** preserving not just URLs but metadata like timestamps, captions, and comments, and then analyze that collection for patterns (such as which accounts or themes dominated the feed).
 
-**Supported Platforms:** As of 2025, Zeeschuimer works with a range of social networks and content-sharing platforms, including:
+**Supported Platforms:** As of 2025, Zeeschuimer works with [a range of social networks and content-sharing platforms](https://medialab.sciencespo.fr/en/tools/zeeschuimer/), including:
 
 * **TikTok** (videos/posts and comments)
 * **Instagram** (posts only)
@@ -44,7 +52,7 @@ In practical terms, this means a journalist could **capture a personalized feed 
 * **Gab**
 * **Truth Social**
 * **Pinterest**
-* **RedNote** [(Xiaohongshu)](https://medialab.sciencespo.fr/en/tools/zeeschuimer/)
+* **RedNote** (Xiaohongshu)
 
 This list is actively maintained and may expand. The extension’s code must be updated for each platform as their website structures change, so support can occasionally break when a site is redesigned. &#x20;
 
@@ -56,7 +64,7 @@ Installing and using Zeeschuimer does **not** require any programming knowledge.
 
 _Figure: The Zeeschuimer extension’s interface allows you to enable/disable capturing on each supported platform and shows the number of items collected in real time (e.g. “LinkedIn – 12 items”). After browsing, you can export the captured posts as a file or upload them directly to a 4CAT instance for analysis. The interface also provides fields (at the top) to connect to 4CAT and buttons to send the data._
 
-**Use Case Example:** A journalist investigating misinformation on TikTok might use Zeeschuimer to collect all videos appearing under a certain hashtag or on their For You page over a period of time. By scrolling through TikTok with Zeeschuimer on, they can gather dozens or hundreds of TikTok posts exactly as the algorithm served them. Later, by exporting this data, the journalist could examine patterns, for example, whether a certain type of content or creator was consistently promoted. This approach captures content that is often elusive to traditional tools: TikTok’s web interface doesn’t offer an easy way to get a list of videos for a hashtag or trend, and the official API is limited. Zeeschuimer bridges that gap by letting the researcher **harvest the content feed directly through the act of browsing**, which is especially useful for platforms where automated collection is restricted or where what _appears_ (due to algorithms or personalization) is itself a subject of study.
+**Use Case Example:** A journalist investigating mis- or disinformation on TikTok might use Zeeschuimer to collect all videos appearing under a certain hashtag or on their For You page over a period of time. By scrolling through TikTok with Zeeschuimer on, they can gather dozens or hundreds of TikTok posts exactly as the algorithm served them. Later, by exporting this data, the journalist could examine patterns, for example, whether a certain type of content or creator was consistently promoted. This approach captures content that is often elusive to traditional tools: TikTok’s web interface doesn’t offer an easy way to get a list of videos for a hashtag or trend, and the official API is limited. Zeeschuimer bridges that gap by letting the researcher **harvest the content feed directly through the act of browsing**, which is especially useful for platforms where automated collection is restricted or where what _appears_ (due to algorithms or personalization) is itself a subject of study.
 
 ## Cost
 
@@ -64,7 +72,7 @@ _Figure: The Zeeschuimer extension’s interface allows you to enable/disable ca
 * [ ] Partially Free
 * [ ] Paid
 
-Zeeschuimer is completely free to use. It is an open-source project released under the[ Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). There are no usage fees. You can download the extension from the official GitHub page and use it as needed. (If you choose to integrate with 4CAT or other analysis tools. However, analysis tools such as NodeXL Pro or a hosted 4CAT server may require separate licences or institutional access.)
+Zeeschuimer is completely free to use. It is an open-source project released under the[ Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). There are no usage fees. You can download the extension from the official GitHub page and use it as needed. If you choose, you can integrate it with 4CAT or other analysis tools. However, analysis tools such as NodeXL Pro or a hosted 4CAT server may require separate licences or institutional access.
 
 ## Level of difficulty
 
@@ -77,7 +85,7 @@ Zeeschuimer is completely free to use. It is an open-source project released und
 * **Web Browser:** Mozilla Firefox (or another Firefox-based browser). _Zeeschuimer is not available in the Chrome Web Store due to technical limitations; it’s distributed as a signed `.xpi` file for Firefox._ The extension can be installed on any Firefox-based browser by downloading the file from the [releases page](https://github.com/digitalmethodsinitiative/zeeschuimer). Ensure you have a relatively recent version of Firefox for compatibility.
 * **Platform Accounts:** Depending on the platform you want to collect from, you might need to be logged in. Zeeschuimer captures what _you_ can see. For example, to capture an Instagram feed or TikTok personalized feed, you’ll need to log in to those services (since much content on those platforms isn’t fully accessible to non-logged-in users). The tool does not provide any special access to data beyond your account’s privileges.
 * **Stable Internet Connection:** Because data collection requires you to load potentially hundreds of posts by scrolling, a reliable internet connection is important. Slow or spotty connections could result in missing some content if pages don’t load fully.
-* **4CAT (optional):** If you plan to use the one-click upload to 4CAT, you will need access to a 4CAT server (for instance, an account on an existing public 4CAT instance, or your own installation). This is not required for using Zeeschuimer itself, but it’s a complementary tool for analysis. If you don’t use 4CAT, you can simply export the data file and use Excel, Python, or other analysis methods.
+* **4CAT (optional):** If you plan to use the one-click upload to[ 4CAT](https://github.com/digitalmethodsinitiative/4cat), you will need access to a 4CAT server (for instance, an account on an existing public 4CAT instance, or your own installation). This is not required for using Zeeschuimer itself, but it’s a complementary tool for analysis. If you don’t use 4CAT, you can simply export the data file and use Excel, Python, or other analysis methods.
 
 No API keys or developer credentials are required – one of Zeeschuimer’s advantages is that it works without the official APIs. Essentially, if you have a Firefox browser and an account on the target platform (when needed), you meet the requirements to use Zeeschuimer.
 
@@ -115,8 +123,7 @@ _(Additional resources: The_ [_Digital Methods Initiative’s own tool page_](ht
 
 ## Tool provider
 
-[Digital Methods Initiative (University of Amsterdam)](https://digitalmethods.net/)\
-The Digital Methods Initiative (DMI) is one of Europe’s leading Internet Studies research groups at UvA, focused on researching the “natively digital” by designing methods and tools to repurpose platforms like Twitter, Facebook, Instagram, YouTube, Reddit, and Google for social and political inquiry.
+[Digital Methods Initiative](https://digitalmethods.net/), University of Amsterdam, Netherlands.
 
 ## Similar tools
 
